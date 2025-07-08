@@ -6,7 +6,7 @@ exports.updateContact = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const oldContact = await ContactImage.getById(id);
+    const oldContact = await ContactImage.getByIdContact(id);
 
     const updatedContact = await ContactImage.updateContact(id, {
       path: `/uploads/${req.file.filename}`,
