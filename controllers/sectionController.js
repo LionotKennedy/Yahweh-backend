@@ -10,6 +10,25 @@ const SECTION_NAMES = {
   CULTURAL: "cultural",
 };
 
+// exports.updateSectionBackground = async (req, res) => {
+//   try {
+//     const { section } = req.params;
+//     const validSection = SECTION_NAMES[section.toUpperCase()];
+
+//     if (!validSection) {
+//       return res.status(400).json({ message: "Section invalide" });
+//     }
+
+//     const updatedBackground = await SectionBackground.update(
+//       validSection,
+//       `/uploads/${req.file.filename}`
+//     );
+
+//     res.json(updatedBackground);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
 exports.updateSectionBackground = async (req, res) => {
   try {
     const { section } = req.params;
@@ -19,10 +38,21 @@ exports.updateSectionBackground = async (req, res) => {
       return res.status(400).json({ message: "Section invalide" });
     }
 
+    // Récupère l'ancien background
+    const oldBackground = await SectionBackground.getBySection(validSection);
+
     const updatedBackground = await SectionBackground.update(
       validSection,
       `/uploads/${req.file.filename}`
     );
+
+    // Supprime l'ancienne image
+    if (oldBackground && oldBackground.path) {
+      const oldPath = path.join(__dirname, '..', oldBackground.path);
+      if (fs.existsSync(oldPath)) {
+        fs.unlinkSync(oldPath);
+      }
+    }
 
     res.json(updatedBackground);
   } catch (error) {
@@ -80,8 +110,12 @@ exports.getBackgroundById = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 exports.updateBackgroundById = async (req, res) => {
   try {
+    // Récupère l'ancien background
+    const oldBackground = await SectionBackground.getById(req.params.id);
+    
     const updatedData = {
       path: `/uploads/${req.file.filename}`,
       ...(req.body.section_name && { section_name: req.body.section_name }),
@@ -91,8 +125,33 @@ exports.updateBackgroundById = async (req, res) => {
       req.params.id,
       updatedData
     );
+    
+    // Supprime l'ancienne image
+    if (oldBackground && oldBackground.path) {
+      const oldPath = path.join(__dirname, '..', oldBackground.path);
+      if (fs.existsSync(oldPath)) {
+        fs.unlinkSync(oldPath);
+      }
+    }
+    
     res.json(updatedBg);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+// exports.updateBackgroundById = async (req, res) => {
+//   try {
+//     const updatedData = {
+//       path: `/uploads/${req.file.filename}`,
+//       ...(req.body.section_name && { section_name: req.body.section_name }),
+//     };
+
+//     const updatedBg = await SectionBackground.updateById(
+//       req.params.id,
+//       updatedData
+//     );
+//     res.json(updatedBg);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };

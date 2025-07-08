@@ -14,6 +14,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/home', require('./routes/homeRoutes'));
 app.use('/api/gallery', require('./routes/galleryRoutes'));
 app.use('/api/sections', require('./routes/sectionRoutes'));
+app.use('/api/contact', require('./routes/contactRoutes'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
