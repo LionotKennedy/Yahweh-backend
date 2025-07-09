@@ -1,5 +1,5 @@
-const Crucifixion = require('../../models/Crucifixion');
-const { crucifixionSchema } = require('../../validation/schemas');
+const Crucifixion = require('../../models/contenu/Crucifixion');
+// const { crucifixionSchema } = require('../../validation/schemas');
 
 class CrucifixionController {
   static async getAllCrucifixion(req, res) {
@@ -45,13 +45,13 @@ class CrucifixionController {
 
   static async createCrucifixion(req, res) {
     try {
-      const { error } = crucifixionSchema.validate(req.body);
-      if (error) {
-        return res.status(400).json({
-          success: false,
-          message: error.details[0].message
-        });
-      }
+      // const { error } = crucifixionSchema.validate(req.body);
+      // if (error) {
+      //   return res.status(400).json({
+      //     success: false,
+      //     message: error.details[0].message
+      //   });
+      // }
 
       const crucifixion = await Crucifixion.create(req.body);
       res.status(201).json({
@@ -70,13 +70,13 @@ class CrucifixionController {
   static async updateCrucifixion(req, res) {
     try {
       const { id } = req.params;
-      const { error } = crucifixionSchema.validate(req.body);
-      if (error) {
-        return res.status(400).json({
-          success: false,
-          message: error.details[0].message
-        });
-      }
+      // const { error } = crucifixionSchema.validate(req.body);
+      // if (error) {
+      //   return res.status(400).json({
+      //     success: false,
+      //     message: error.details[0].message
+      //   });
+      // }
 
       const crucifixion = await Crucifixion.update(id, req.body);
       if (!crucifixion) {

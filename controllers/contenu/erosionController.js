@@ -1,5 +1,5 @@
-const Erosion = require('../../models/Erosion');
-const { erosionSchema } = require('../../validation/schemas');
+const Erosion = require('../../models/contenu/Erosion');
+// const { erosionSchema } = require('../../validation/schemas');
 
 class ErosionController {
   static async getAllErosion(req, res) {
@@ -45,13 +45,13 @@ class ErosionController {
 
   static async createErosion(req, res) {
     try {
-      const { error } = erosionSchema.validate(req.body);
-      if (error) {
-        return res.status(400).json({
-          success: false,
-          message: error.details[0].message
-        });
-      }
+      // const { error } = erosionSchema.validate(req.body);
+      // if (error) {
+      //   return res.status(400).json({
+      //     success: false,
+      //     message: error.details[0].message
+      //   });
+      // }
 
       const erosion = await Erosion.create(req.body);
       res.status(201).json({
@@ -70,13 +70,13 @@ class ErosionController {
   static async updateErosion(req, res) {
     try {
       const { id } = req.params;
-      const { error } = erosionSchema.validate(req.body);
-      if (error) {
-        return res.status(400).json({
-          success: false,
-          message: error.details[0].message
-        });
-      }
+      // const { error } = erosionSchema.validate(req.body);
+      // if (error) {
+      //   return res.status(400).json({
+      //     success: false,
+      //     message: error.details[0].message
+      //   });
+      // }
 
       const erosion = await Erosion.update(id, req.body);
       if (!erosion) {

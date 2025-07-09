@@ -17,6 +17,13 @@ app.use('/api/sections', require('./routes/sectionRoutes'));
 app.use('/api/contact', require('./routes/contactRoutes'));
 app.use('/api/menu', require('./routes/menuRoutes'));
 
+// Routes pour contenu
+app.use('/api/balance', require('./routes/contenu/balanceRoutes'));
+app.use('/api/crucifixion', require('./routes/contenu/crucifixionRoutes'));
+app.use('/api/Erosion', require('./routes/contenu/erosionRoutes'));
+app.use('/api/feasts', require('./routes/contenu/feastsRoutes'));
+app.use('/api/nation', require('./routes/contenu/nationRoutes'));
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

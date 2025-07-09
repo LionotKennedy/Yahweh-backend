@@ -20,11 +20,11 @@ class Erosion {
   }
 
   static async create(data) {
-    const { description } = data;
+    const { descriptionErosion } = data;
     try {
       const result = await pool.query(
-        `INSERT INTO erosion (description) VALUES ($1) RETURNING *`,
-        [description]
+        `INSERT INTO erosion (descriptionErosion) VALUES ($1) RETURNING *`,
+        [descriptionErosion]
       );
       return result.rows[0];
     } catch (error) {
@@ -33,12 +33,12 @@ class Erosion {
   }
 
   static async update(id, data) {
-    const { description } = data;
+    const { descriptionErosion } = data;
     try {
       const result = await pool.query(
-        `UPDATE erosion SET description = $1, updated_at = CURRENT_TIMESTAMP 
+        `UPDATE erosion SET descriptionErosion = $1, updated_at = CURRENT_TIMESTAMP 
          WHERE id = $2 RETURNING *`,
-        [description, id]
+        [descriptionErosion, id]
       );
       return result.rows[0];
     } catch (error) {

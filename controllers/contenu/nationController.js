@@ -1,5 +1,5 @@
-const Nation = require('../models/Nation');
-const { nationSchema } = require('../validation/schemas');
+const Nation = require('../../models/contenu/Nation');
+// const { nationSchema } = require('../validation/schemas');
 
 class NationController {
   static async getAllNation(req, res) {
@@ -45,13 +45,13 @@ class NationController {
 
   static async createNation(req, res) {
     try {
-      const { error } = nationSchema.validate(req.body);
-      if (error) {
-        return res.status(400).json({
-          success: false,
-          message: error.details[0].message
-        });
-      }
+      // const { error } = nationSchema.validate(req.body);
+      // if (error) {
+      //   return res.status(400).json({
+      //     success: false,
+      //     message: error.details[0].message
+      //   });
+      // }
 
       const nation = await Nation.create(req.body);
       res.status(201).json({
@@ -70,13 +70,13 @@ class NationController {
   static async updateNation(req, res) {
     try {
       const { id } = req.params;
-      const { error } = nationSchema.validate(req.body);
-      if (error) {
-        return res.status(400).json({
-          success: false,
-          message: error.details[0].message
-        });
-      }
+      // const { error } = nationSchema.validate(req.body);
+      // if (error) {
+      //   return res.status(400).json({
+      //     success: false,
+      //     message: error.details[0].message
+      //   });
+      // }
 
       const nation = await Nation.update(id, req.body);
       if (!nation) {

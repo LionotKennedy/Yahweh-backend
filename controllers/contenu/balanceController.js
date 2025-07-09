@@ -1,5 +1,5 @@
-const Balance = require('../../models/Balance');
-const { balanceSchema } = require('../../validation/schemas');
+const Balance = require("../../models/contenu/Balance");
+// const { balanceSchema } = require('../../validation/schemas');
 
 class BalanceController {
   static async getAllBalance(req, res) {
@@ -8,12 +8,12 @@ class BalanceController {
       res.json({
         success: true,
         data: balance,
-        message: 'Balance records retrieved successfully'
+        message: "Balance records retrieved successfully",
       });
     } catch (error) {
       res.status(500).json({
         success: false,
-        message: error.message
+        message: error.message,
       });
     }
   }
@@ -22,47 +22,47 @@ class BalanceController {
     try {
       const { id } = req.params;
       const balance = await Balance.findById(id);
-      
+
       if (!balance) {
         return res.status(404).json({
           success: false,
-          message: 'Balance record not found'
+          message: "Balance record not found",
         });
       }
 
       res.json({
         success: true,
         data: balance,
-        message: 'Balance record retrieved successfully'
+        message: "Balance record retrieved successfully",
       });
     } catch (error) {
       res.status(500).json({
         success: false,
-        message: error.message
+        message: error.message,
       });
     }
   }
 
   static async createBalance(req, res) {
     try {
-      const { error } = balanceSchema.validate(req.body);
-      if (error) {
-        return res.status(400).json({
-          success: false,
-          message: error.details[0].message
-        });
-      }
+      // const { error } = balanceSchema.validate(req.body);
+      // if (error) {
+      //   return res.status(400).json({
+      //     success: false,
+      //     message: error.details[0].message
+      //   });
+      // }
 
       const balance = await Balance.create(req.body);
       res.status(201).json({
         success: true,
         data: balance,
-        message: 'Balance record created successfully'
+        message: "Balance record created successfully",
       });
     } catch (error) {
       res.status(500).json({
         success: false,
-        message: error.message
+        message: error.message,
       });
     }
   }
@@ -70,31 +70,31 @@ class BalanceController {
   static async updateBalance(req, res) {
     try {
       const { id } = req.params;
-      const { error } = balanceSchema.validate(req.body);
-      if (error) {
-        return res.status(400).json({
-          success: false,
-          message: error.details[0].message
-        });
-      }
+      // const { error } = balanceSchema.validate(req.body);
+      // if (error) {
+      //   return res.status(400).json({
+      //     success: false,
+      //     message: error.details[0].message
+      //   });
+      // }
 
       const balance = await Balance.update(id, req.body);
       if (!balance) {
         return res.status(404).json({
           success: false,
-          message: 'Balance record not found'
+          message: "Balance record not found",
         });
       }
 
       res.json({
         success: true,
         data: balance,
-        message: 'Balance record updated successfully'
+        message: "Balance record updated successfully",
       });
     } catch (error) {
       res.status(500).json({
         success: false,
-        message: error.message
+        message: error.message,
       });
     }
   }
@@ -103,22 +103,22 @@ class BalanceController {
     try {
       const { id } = req.params;
       const balance = await Balance.delete(id);
-      
+
       if (!balance) {
         return res.status(404).json({
           success: false,
-          message: 'Balance record not found'
+          message: "Balance record not found",
         });
       }
 
       res.json({
         success: true,
-        message: 'Balance record deleted successfully'
+        message: "Balance record deleted successfully",
       });
     } catch (error) {
       res.status(500).json({
         success: false,
-        message: error.message
+        message: error.message,
       });
     }
   }

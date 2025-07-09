@@ -1,5 +1,5 @@
-const Feasts = require('../../models/Feasts');
-const { feastsSchema } = require('../../validation/schemas');
+const Feasts = require('../../models/contenu/Feasts');
+// const { feastsSchema } = require('../../validation/schemas');
 
 class FeastsController {
   static async getAllFeasts(req, res) {
@@ -45,13 +45,13 @@ class FeastsController {
 
   static async createFeasts(req, res) {
     try {
-      const { error } = feastsSchema.validate(req.body);
-      if (error) {
-        return res.status(400).json({
-          success: false,
-          message: error.details[0].message
-        });
-      }
+      // const { error } = feastsSchema.validate(req.body);
+      // if (error) {
+      //   return res.status(400).json({
+      //     success: false,
+      //     message: error.details[0].message
+      //   });
+      // }
 
       const feasts = await Feasts.create(req.body);
       res.status(201).json({
@@ -70,13 +70,13 @@ class FeastsController {
   static async updateFeasts(req, res) {
     try {
       const { id } = req.params;
-      const { error } = feastsSchema.validate(req.body);
-      if (error) {
-        return res.status(400).json({
-          success: false,
-          message: error.details[0].message
-        });
-      }
+      // const { error } = feastsSchema.validate(req.body);
+      // if (error) {
+      //   return res.status(400).json({
+      //     success: false,
+      //     message: error.details[0].message
+      //   });
+      // }
 
       const feasts = await Feasts.update(id, req.body);
       if (!feasts) {
