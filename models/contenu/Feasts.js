@@ -111,7 +111,7 @@ class Feasts {
         `UPDATE feasts SET titleFeasts = $1, titleFeasts2 = $2, fieldFeasts2 = $3, titleFeasts3 = $4, fieldFeasts3 = $5, titleFeasts4 = $6,
         fieldFeasts4 = $7, descriptionFeasts4 = $8, videoFeasts4 = $9, titleFeasts5 = $10, fieldFeasts5 = $11, descriptionFeasts5 = $12,
         videoFeasts5 = $13, titleFeasts6 = $14, fieldFeasts6a = $15, fieldFeasts6b = $16, updated_at = CURRENT_TIMESTAMP 
-         WHERE id = $3 RETURNING *`,
+         WHERE id = $17 RETURNING *`,
         [
           titleFeasts,
           titleFeasts2,

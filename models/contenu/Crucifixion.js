@@ -88,7 +88,7 @@ class Crucifixion {
         `UPDATE crucifixion SET titleCrucifixion = $1, descriptionCrucifixion1 = $2, descriptionCrucifixion2 = $3, descriptionCrucifixion3 = $4,
         descriptionCrucifixion4 = $5, descriptionCrucifixion5 = $6, descriptionCrucifixion6 = $7, descriptionCrucifixion7 = $8,
         descriptionCrucifixion8 = $9, descriptionCrucifixion9 = $10, descriptionCrucifixion10 = $11, descriptionCrucifixion11 = $12, updated_at = CURRENT_TIMESTAMP 
-         WHERE id = $3 RETURNING *`,
+         WHERE id = $13 RETURNING *`,
         [
           titleCrucifixion,
           descriptionCrucifixion1,
