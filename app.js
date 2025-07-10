@@ -27,6 +27,7 @@ app.use('/api/operation', require('./routes/contenu/operationRoutes'));
 app.use('/api/sabbath', require('./routes/contenu/sabbathRoutes'));
 app.use('/api/tetragrama', require('./routes/contenu/tetragramaRoutes'));
 app.use('/api/universe', require('./routes/contenu/universeRoutes'));
+app.use('/api/home-contenu', require('./routes/contenu-home/routes'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

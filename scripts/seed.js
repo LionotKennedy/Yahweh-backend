@@ -1,314 +1,284 @@
 const pool = require("../config/db");
 
-const seedData = {
-  balance: {
-    titleBalance: "Balance de la Justice Divine",
-    descriptionBalance1:
-      "La Balance de la Justice représente l'équilibre parfait entre la miséricorde et la justice dans les voies de Yahweh. Chaque action a ses conséquences, et chaque âme sera pesée selon ses œuvres.",
-    descriptionBalance2:
-      "Dans cette balance divine, nous trouvons l'assurance que l'injustice ne prévaudra pas éternellement. Yahweh voit tout et juge avec une parfaite équité.",
-    descriptionBalance3:
-      "Notre responsabilité est de vivre de manière à ce que nos actions pèsent favorablement dans cette balance, en pratiquant la justice, la miséricorde et l'humilité.",
-    descriptionBalance4:
-      "La balance nous enseigne que nous devons chercher l'équilibre dans tous les aspects de notre vie : spirituel et matériel, individuel et communautaire, justice et compassion.",
-  },
-  crucifixion: {
-    titleCrucifixion: "La Crucifixion : Sacrifice Ultime de l'Amour Divin",
-    descriptionCrucifixion1:
-      "La crucifixion représente le sacrifice suprême de l'amour divin pour l'humanité. C'est l'acte de rédemption qui ouvre la voie du salut pour tous ceux qui croient.",
-    descriptionCrucifixion2:
-      "Sur la croix, nous voyons la manifestation parfaite de la justice et de la miséricorde divines. Le sacrifice innocent pour les coupables révèle la profondeur de l'amour de Yahweh.",
-    descriptionCrucifixion3:
-      "La souffrance endurée sur la croix nous enseigne que l'amour véritable implique parfois le sacrifice de soi pour le bien d'autrui.",
-    descriptionCrucifixion4:
-      "La crucifixion brise les chaînes du péché et de la mort, offrant à l'humanité une nouvelle alliance avec le Créateur.",
-    descriptionCrucifixion5:
-      "Dans cet acte d'amour ultime, nous trouvons l'espoir de la résurrection et de la vie éternelle avec Yahweh.",
-    descriptionCrucifixion6:
-      "La croix devient le symbole de notre foi et le rappel constant du prix payé pour notre liberté spirituelle.",
-    descriptionCrucifixion7:
-      "Méditer sur la crucifixion nous inspire à vivre une vie de gratitude et de service envers Yahweh et notre prochain.",
-    descriptionCrucifixion8:
-      "Le sacrifice de la croix nous appelle à porter notre propre croix quotidiennement, en suivant l'exemple d'amour et de dévotion.",
-    descriptionCrucifixion9:
-      "La crucifixion révèle que la vraie victoire vient parfois à travers la défaite apparente, et que la mort peut mener à la vie.",
-    descriptionCrucifixion10:
-      "Cet événement central de notre foi nous unit dans une communion spirituelle avec tous ceux qui ont accepté ce sacrifice d'amour.",
-    descriptionCrucifixion11:
-      "La crucifixion nous enseigne que l'amour de Yahweh n'a pas de limites et qu'aucun sacrifice n'est trop grand pour sauver Ses enfants.",
-  },
-  erosion: {
-    descriptionErosion:
-      "L'érosion de la Constitution représente un défi majeur pour notre société moderne. Nous observons avec préoccupation comment les principes fondamentaux de justice, de liberté et d'égalité sont progressivement affaiblis par des intérêts particuliers et des agendas politiques.",
-  },
-  feasts: {
-    titleFeasts: "Les Fêtes Sacrées de Yahweh",
-    titleFeasts2: "Pâque - La Libération Divine",
-    fieldFeasts2:
-      "La Pâque commémore la libération du peuple de Dieu de l'esclavage. Cette fête nous rappelle que Yahweh est notre libérateur et notre sauveur dans toutes les circonstances de la vie.",
-    titleFeasts3: "Pentecôte - L'Effusion de l'Esprit",
-    fieldFeasts3:
-      "La Pentecôte célèbre le don de l'Esprit Saint et marque le début de la mission spirituelle. C'est un temps de renouvellement et de consécration à la volonté divine.",
-    titleFeasts4: "Fête des Tabernacles - Demeure avec Yahweh",
-    fieldFeasts4:
-      "Cette fête nous enseigne que Yahweh désire habiter parmi Son peuple. Elle symbolise notre pèlerinage spirituel et notre dépendance totale envers le Créateur.",
-    descriptionFeasts4:
-      "Durant cette période sacrée, nous nous souvenons que notre vraie demeure est spirituelle et que nous sommes des pèlerins sur cette terre, cherchant la cité céleste.",
-    videoFeasts4: "https://www.youtube.com/watch?v=example-tabernacles-video",
-    titleFeasts5: "Jour des Expiations - Purification de l'Âme",
-    fieldFeasts5:
-      "Le Jour des Expiations est le moment le plus solennel de l'année, consacré au repentir, au jeûne et à la purification spirituelle de toute la communauté.",
-    descriptionFeasts5:
-      "Cette journée sacrée nous offre l'opportunité de nous réconcilier avec Yahweh et de renouveler notre engagement envers une vie de sainteté et de justice.",
-    videoFeasts5: "https://www.youtube.com/watch?v=example-atonement-video",
-    titleFeasts6: "Sabbats et Nouvelles Lunes - Cycles Sacrés",
-    fieldFeasts6a:
-      "Les Sabbats hebdomadaires nous offrent un temps de repos spirituel et de communion avec Yahweh. C'est un jour consacré à la prière, à l'étude et à la réflexion.",
-    fieldFeasts6b:
-      "Les Nouvelles Lunes marquent le début de chaque mois sacré et nous rappellent les cycles divins qui gouvernent le temps et les saisons spirituelles.",
-  },
-  nation: {
-    titleNation: "La Nation de Yahweh : Un Peuple Élu",
-    descriptionNation:
-      "La Nation de Yahweh représente le rassemblement des fidèles qui ont choisi de suivre les enseignements authentiques de Yahweh Ben Yahweh. Nous formons une communauté unie par la foi et la dévotion.",
-    descriptionNation2:
-      "Notre nation spirituelle transcende les frontières géographiques et ethniques. Nous sommes liés par notre engagement commun envers la vérité divine et la justice sociale.",
-    descriptionNation3:
-      "En tant que membres de cette nation sacrée, nous nous efforçons de vivre selon les principes divins, en pratiquant l'amour, la compassion et la righteousness dans tous les aspects de notre vie quotidienne.",
-  },
-  operation: {
-    descriptionOperation1:
-      "L'Opération Guerre des Mots représente notre engagement dans le combat spirituel contre la désinformation et les fausses doctrines qui envahissent notre société.",
-    descriptionOperation2:
-      "Nous utilisons la puissance de la Parole divine pour contrer les mensonges et révéler la vérité à ceux qui cherchent sincèrement la lumière spirituelle.",
-    descriptionOperation3:
-      "Cette opération implique l'éducation, la prédication et le témoignage personnel pour partager les enseignements authentiques de Yahweh avec le monde.",
-    descriptionOperation4:
-      "Notre arme principale est l'amour et la vérité, utilisés avec sagesse et discernement pour toucher les cœurs et transformer les vies par la grâce divine.",
-  },
-  sabbath: {
-    titleSabbath: "Le Sabbat : Jour Sacré de Repos et de Communion",
-    descriptionSabbath1:
-      "Le Sabbat est un don divin, un jour consacré au repos spirituel et à la communion avec Yahweh. C'est un temps béni pour renouveler notre âme et notre esprit.",
-    descriptionSabbath2:
-      "Observé du coucher du soleil du vendredi au coucher du soleil du samedi, le Sabbat nous rappelle que nous sommes créés pour plus que le travail et les préoccupations matérielles.",
-    descriptionSabbath3:
-      "Durant le Sabbat, nous nous abstenons du travail séculier pour nous concentrer sur la prière, l'étude des Écritures et la communion fraternelle.",
-    descriptionSabbath4:
-      "Ce jour sacré nous enseigne l'importance de l'équilibre entre l'activité et le repos, entre le matériel et le spirituel dans notre vie quotidienne.",
-    descriptionSabbath5:
-      "Le Sabbat est un avant-goût du repos éternel promis aux fidèles, un rappel de la paix parfaite qui nous attend dans le royaume de Yahweh.",
-  },
-  tetragrama: {
-    title: "Le Tétragramme Sacré",
-    description:
-      "Le Tétragramme YHWH représente le nom sacré de Dieu, révélé à Moïse au mont Sinaï. Ce nom divin est la source de toute création et de toute spiritualité véritable.",
-    description2:
-      "Dans notre communauté, nous honorons ce nom sacré à travers nos prières, nos études et notre mode de vie. Le Tétragramme nous guide vers la compréhension profonde de la volonté divine.",
-  },
-  universe: {
-    descriptionUniverse1:
-      "L'Univers de Yahweh révèle la magnificence de la création divine. Chaque étoile, chaque planète, chaque forme de vie témoigne de la sagesse infinie du Créateur.",
-    descriptionUniverse2:
-      "Dans cet univers sacré, nous découvrons notre place et notre purpose. Nous ne sommes pas des accidents cosmiques, mais des êtres créés avec intention et amour divin.",
-    descriptionUniverse3:
-      "La contemplation de l'univers nous enseigne l'humilité et nous inspire à chercher la connexion spirituelle avec notre Créateur. Chaque lever de soleil est un rappel de Sa grâce.",
-    descriptionUniverse4:
-      "À travers l'étude de l'univers de Yahweh, nous apprenons les lois spirituelles qui gouvernent notre existence et nous guidons vers l'illumination divine.",
-    videoLinkUniverse: "https://www.youtube.com/watch?v=example-universe-video",
-  },
-};
-
-async function seedDatabase() {
+const seedData = async () => {
   try {
-    console.log("🌱 Seeding database with initial data...");
+    console.log("🌱 Starting database seeding...");
 
-    // Seed balance
+    // Seed contacts
+    const contactData = {
+      title: "Contact us",
+      description1:
+        "P.E.E.S.S. Foundation, 1777 NE Loop 410, Suite 600, San Antonio, TX 78217",
+      description2:
+        "P.E.E.S.S. Foundation, P.O. Box 884, Seguin, TX 78156-0884",
+      phone: "1-800-967-7337 (210) 678-3061",
+      email: "yahweh@yahwehbenyahweh.com",
+    };
+
     await pool.query(
       `
-      INSERT INTO balance (titleBalance, descriptionBalance1, descriptionBalance2, descriptionBalance3, descriptionBalance4)
+      INSERT INTO contacts (title, description1, description2, phone, email)
       VALUES ($1, $2, $3, $4, $5)
       ON CONFLICT DO NOTHING
     `,
       [
-        seedData.balance.titleBalance,
-        seedData.balance.descriptionBalance1,
-        seedData.balance.descriptionBalance2,
-        seedData.balance.descriptionBalance3,
-        seedData.balance.descriptionBalance4,
+        contactData.title,
+        contactData.description1,
+        contactData.description2,
+        contactData.phone,
+        contactData.email,
       ]
     );
 
-    // Seed crucifixion
+    // Seed cultural_attire
+    const culturalAttireData = {
+      title: "Nos Vêtements Traditionnels Sacrés",
+      description1:
+        "יהוה בן יהוה dia nandidy ny fomba tokony hitafianay sy ny antony manosika anizany.'Izay mandresy dia hakan-damba fotsy, ary tsy hofanako ny anarany ao amin'ny Bokin'ny Fiaina, fa hanaiko ny anarany eo anatrehan'ny Raiko, יהוה, sy eo anatrehan'ny anjely Neny' (Apokalipsy 3:5). Tenin'izany dia tena zava-dehibe ho an'ny famonjena sy ny fiainana mandrakizay. Raha mitovy fitafiana amin'ny hafa isika ka tsy maharesy ny fomba jentilisa, dia hofafana ny anarantsika ao amin'ny...'Ny Bokin'ny Fiaina.'Mba ho voavonjy amin'ny faharavana dia tsy maintsy miverina amin'ny kolontsain'i יהוה isika.",
+      description2:
+        "Inona no zava-dehibe momba ny akanjon'ny fotsy masina anao?",
+      description3:
+        "Voalohany, izany dia kolontsain'Andriamanitra, יהוה, sy ny Zanak'Andriamanitra, יהוה בן יהוה. Ny Daniely 7:9 dia mamaritra an'i יהוה, Ilay Antitra andro, nitafy akanjo fotsy tahaka ny lane, ary milaza hoe: 'Nahita aho mandra-pisy ny seza fiandrianana natao, ary Ilay Antitra andro nipetraka, izay nitafy akanjo fotsy tahaka ny lane, ary ny volony tahaka ny volonondry madio:…' Ny Apokalipsy 1:13-14 kosa dia mampiseho ny Zanak'i יהוה nitafy akanjo nisy hatramin'ny tongony, ary milaza amin'ny ampahany: '… olona mitovy amin'ny Zanak'olona, nitafy akanjo lava nisy hatramin'ny tongony, fehin'ny fehikibo volamena. Ny lohany sy ny volony dia fotsy tahaka ny volonondry, fotsy tahaka ny lane; ary ny masony tahaka ny lelafo afo';",
+      description4:
+        "Raha tsy fantatra amin'ny fomba hitafian'Andriamanitra ny olona iray, dia tsy hahafantatra Azy izy rehefa avy. Noho izany, mety tsy hihaino ny antsoiny izy ka very ny fitahian'ny lanitra.",
+      description5:
+        "Ny fotsy dia mariky ny fahadiovana sy ny fitambarana. Ny fitafiana akanjo fotsy dia maneho fa misy dingana fanadiovana mitranga—fanesorana ny fahotana sy fiverenana amin'ny lalàn'ny fanekena. 'Na dia mena toy ny menamaso aza ny fahotanareo, dia ho fotsy toy ny lane izy' (Isaia 1:18). Ao amin'ny Fanjakan'i יהוה, ny fitafiana akanjo fotsy dia mandrakizaya, ara-batana sy ara-panahy (Mpitoriteny 9:8). Izany dia manambara ny fidiran'ny vanim-potoana vaovao, fenitra ara-pitondrantena vaovao, fanjakana tsara; ny Governemanta Teôkratikan'i יהוה.",
+    };
+
     await pool.query(
       `
-      INSERT INTO crucifixion (titleCrucifixion, descriptionCrucifixion1,descriptionCrucifixion2,
-      descriptionCrucifixion3,
-      descriptionCrucifixion4,
-      descriptionCrucifixion5,descriptionCrucifixion6,descriptionCrucifixion7,
-      descriptionCrucifixion8,descriptionCrucifixion9,descriptionCrucifixion10,
-      descriptionCrucifixion11
-
-      )
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
-      ON CONFLICT DO NOTHING
-    `,
-      [
-        seedData.crucifixion.titleCrucifixion,
-        seedData.crucifixion.descriptionCrucifixion1,
-        seedData.crucifixion.descriptionCrucifixion2,
-        seedData.crucifixion.descriptionCrucifixion3,
-        seedData.crucifixion.descriptionCrucifixion4,
-        seedData.crucifixion.descriptionCrucifixion5,
-        seedData.crucifixion.descriptionCrucifixion6,
-        seedData.crucifixion.descriptionCrucifixion7,
-        seedData.crucifixion.descriptionCrucifixion8,
-        seedData.crucifixion.descriptionCrucifixion9,
-        seedData.crucifixion.descriptionCrucifixion10,
-        seedData.crucifixion.descriptionCrucifixion11,
-        // JSON.stringify(seedData.crucifixion.descriptions),
-      ]
-    );
-
-    // Seed erosion
-    await pool.query(
-      `
-      INSERT INTO erosion (descriptionErosion)
-      VALUES ($1)
-      ON CONFLICT DO NOTHING
-    `,
-      [seedData.erosion.descriptionErosion]
-    );
-
-    // Seed feasts
-    await pool.query(
-      `
-      INSERT INTO feasts (
-      titleFeasts, 
-      titleFeasts2,
-      fieldFeasts2, 
-      titleFeasts3,
-      fieldFeasts3,
-      titleFeasts4,
-      fieldFeasts4,
-      descriptionFeasts4,
-      videoFeasts4,
-      titleFeasts5,
-      fieldFeasts5,
-      descriptionFeasts5,
-      videoFeasts5,
-      titleFeasts6,
-      fieldFeasts6a,
-      fieldFeasts6b
-      )
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
-      ON CONFLICT DO NOTHING
-    `,
-      [
-        seedData.feasts.titleFeasts,
-        seedData.feasts.titleFeasts2,
-        seedData.feasts.fieldFeasts2,
-        seedData.feasts.titleFeasts3,
-        seedData.feasts.fieldFeasts3,
-        seedData.feasts.titleFeasts4,
-        seedData.feasts.fieldFeasts4,
-        seedData.feasts.descriptionFeasts4,
-        seedData.feasts.videoFeasts4,
-        seedData.feasts.titleFeasts5,
-        seedData.feasts.fieldFeasts5,
-        seedData.feasts.descriptionFeasts5,
-        seedData.feasts.videoFeasts5,
-        seedData.feasts.titleFeasts6,
-        seedData.feasts.fieldFeasts6a,
-        seedData.feasts.fieldFeasts6b,
-        // JSON.stringify(seedData.feasts.content)
-      ]
-    );
-
-    // Seed nation
-    await pool.query(
-      `
-      INSERT INTO nation (titleNation, descriptionNation, descriptionNation2, descriptionNation3)
-      VALUES ($1, $2, $3, $4)
-      ON CONFLICT DO NOTHING
-    `,
-      [
-        seedData.nation.titleNation,
-        seedData.nation.descriptionNation,
-        seedData.nation.descriptionNation2,
-        seedData.nation.descriptionNation3,
-      ]
-    );
-
-    // Seed operation
-    await pool.query(
-      `
-      INSERT INTO operation (descriptionOperation1, descriptionOperation2, descriptionOperation3, descriptionOperation4)
-      VALUES ($1, $2, $3, $4)
-      ON CONFLICT DO NOTHING
-    `,
-      [
-        seedData.operation.descriptionOperation1,
-        seedData.operation.descriptionOperation2,
-        seedData.operation.descriptionOperation3,
-        seedData.operation.descriptionOperation4,
-      ]
-    );
-
-    // Seed sabbath
-    await pool.query(
-      `
-      INSERT INTO sabbath (titleSabbath, descriptionSabbath1, descriptionSabbath2, descriptionSabbath3
-      , descriptionSabbath4, descriptionSabbath5)
+      INSERT INTO cultural_attire (title, description1, description2, description3, description4, description5)
       VALUES ($1, $2, $3, $4, $5, $6)
       ON CONFLICT DO NOTHING
     `,
       [
-        seedData.sabbath.titleSabbath,
-        seedData.sabbath.descriptionSabbath1,
-        seedData.sabbath.descriptionSabbath2,
-        seedData.sabbath.descriptionSabbath3,
-        seedData.sabbath.descriptionSabbath4,
-        seedData.sabbath.descriptionSabbath5,
+        culturalAttireData.title,
+        culturalAttireData.description1,
+        culturalAttireData.description2,
+        culturalAttireData.description3,
+        culturalAttireData.description4,
+        culturalAttireData.description5,
       ]
     );
 
-    // Seed tetragrama
+    // Seed followers
+    const followersData = {
+      title: "La Communauté des Fidèles",
+      description1:
+        "Ny mpanaraka an'i יהוה בן יהוה dia anisan'ny vondrona manokana sy voafidy. Nosafidin'i יהוה izy ireo ho voavonjy sy hahazo fiainana mandrakizay. Amin'izao fotoana izao dia iray amin'ny fanokanana azy ireo eo amin'ny toerana fanapahana izay tokony ho azy.",
+      description2:
+        "Ny mpanaraka an'i יהוה בן יהוה dia mahazo famonjena, fitiavana, ary fiarovana avy amin'i יהוה בן יהוה, Andriamanitry ny mpanaraka Azy sy ny Zanany, יהוה בן יהוה (Ohabolana 18:10).",
+      description3:
+        "Ny mpanaraka an'i יהוה בן יהוה dia olombelona izay mampiasa sy mampihetsika ny heriny ara-tsaina hanao eritreritra ary hanova ireo eritreritra ireo ho atao voalamina, izay mahatonga vokatra hita maso. Tsy miadana sy tsy mitandrina izy ireo. Maro no afaka mijoro ho vavolombelona fa ny mpanaraka an'i יהוה בן יהוה dia mpianatra, manam-pahaizana, ary mpianatra ny fitsipika ara-Baiboly. Izy ireo dia mpikambana, namana, mpiara-dia, ary mpanohana an'i יהוה sy ny lalàny. Izy ireo no mahafeno ny fepetra takina amin'ny olombelona amin'ny alalan'ny fanatanterahany ny fanapahan-kevitra ara-drariny sy ara-tsaina.",
+      description4:
+        "Ny mpanaraka marina an'i יהוה בן יהוה dia mifikitra amin'ny hafatr'Andriamanitra momba ny famonjena, izay manehy finoana tsara ho an'ny olona tsara fanahy rehetra, tsy misy hosoka, fitaka, na famadihana; ka mahatonga izay rehetra mino sy manara-dalàna ny fitondrantena ho ara-dalàna, ara-drariny, mahitsy, miharihary, mahitsy fo, tsara fitondrana, mahitsy toetra, ara-pitondrantena, ary manana fitsipika. Rehefa misy ireo toetra manokana ireo ao amin'ny toetran'ny olona iray, dia lasa tahaka ny soratra masina na dika mitovy amin'ny maha-Andriamanitra izy, ary maneho ny endr'an'i יהוה sy ny Zanany, יהוה בן יהוה.",
+      description5:
+        "Raha fintinina, ny mpanaraka an'i יהוה בן יהוה dia manezo fitiavana mafana sy firaiketam-po amin'ny olona na vondrona rehetra manaraka fitsipika ara-moraly. Manana fangoraham-po sy firahalahiana izy ireo, izay tokony ho an'ny olon-drehetra. Marina tokoa fa manana fiahiana lalina ny soa iraisany. Izy ireo no maha-olona feno fangoraham-po ao amin'ny fiarahamonina: ireo mpandray anjara mavitrika sy mahalala fomba amin'ny fanorenana ny...",
+    };
+
     await pool.query(
       `
-      INSERT INTO tetragrama (title, description, description2)
-      VALUES ($1, $2, $3)
+      INSERT INTO followers (title, description1, description2, description3, description4, description5)
+      VALUES ($1, $2, $3, $4, $5, $6)
       ON CONFLICT DO NOTHING
     `,
       [
-        seedData.tetragrama.title,
-        seedData.tetragrama.description,
-        seedData.tetragrama.description2,
+        followersData.title,
+        followersData.description1,
+        followersData.description2,
+        followersData.description3,
+        followersData.description4,
+        followersData.description5,
       ]
     );
 
-        // Seed universe
+    // Seed home_page
+    const homePageData = {
+      video_section_title: "AFAKA MAMANTATRA NY ZANAKA VE IANAO?",
+      video_section_content:
+        "Ho fantatrao Ve Izy? Iza no Anarany, raha tohizinao? Hijery tahaky ny aho Izy rehefa miverina amin'ny Fiverenany Fanindroany mba haka antsika ho any Aminy? Valiny ireo fanontaniana ireo sy maro hafa koa no hita ao amin'ity sety DVD misy kapila roa mahery ity, antsoina hoe, \"I Yahweh Ben Yahweh no Andriamanitra Marina sy ny Fiainana Mandrakizay.\" Mipetraha tsara ka jereo ity sombin-dahatsary fohy ity, ary baovao izao mba hahazoanao ny hafatra feno famonjena avy Aminy.",
+    };
+
+    const homePageResult = await pool.query(
+      `
+      INSERT INTO home_page (video_section_title, video_section_content)
+      VALUES ($1, $2)
+      RETURNING id
+    `,
+      [homePageData.video_section_title, homePageData.video_section_content]
+    );
+
+    const homePageId = homePageResult.rows[0].id;
+
+    // Seed home_page_videos
+    const videos = [
+      {
+        src: "https://ms.yahwehbenyahweh.com/video/720/2025_FeastThemeVideo_New.mp4",
+        poster: "page-banner_.jpg",
+      },
+      {
+        src: "https://ms.yahwehbenyahweh.com/video/720/Good_News_Commercial.mp4",
+        poster: "Good_News_of_Yahweh.jpg",
+      },
+      {
+        src: "https://ms.yahwehbenyahweh.com/video/720/Home_Page_Promo.mp4",
+        poster: "Eternal_Life.jpg",
+      },
+    ];
+
+    for (const video of videos) {
+      await pool.query(
+        `
+        INSERT INTO home_page_videos (home_page_id, src, poster)
+        VALUES ($1, $2, $3)
+        ON CONFLICT DO NOTHING
+      `,
+        [homePageId, video.src, video.poster]
+      );
+    }
+
+    // Seed yahweh
+    const yahwehData = {
+      title1: "Le Nom Sacré du Créateur",
+      title2: "YAHWEH",
+      description1:
+        "Ny hery mandrisika ny izao rehetra izao dia tsy hery mistery, fa olona tena izy mitondra ny anarana hoe יהוה. Ny fitsidihana ny tobin'ny habakabaka iraisam-pirenena, sy ny fandinihana ara-tsiansa, anisan'izany ny sary nalaina avy any amin'ny planeta hafa, dia manaporofo fa ny habakabaka mahagaga sy goavana dia voarindra tsara. Tsy misy dikany ny manao fehin-kevitra fa izao tontolo goavana izao dia voarindra tsara nefa tsy misy hery iray mifehy. Ny lojika dia milaza fa tsy misy hery tsy manan-tsaina afaka hamorona izao karazana fiainana isan-karazany izao, na hanome ny fahendrena sy hery tsy manam-petra hita eny amin'ny izao tontolo izao.",
+      description2:
+        "Fa izao no lazain'i יהוה, Ilay nahary ny lanitra; יהוה formed the no namorona ny tany sy nanao izy, Nisy nanorenany izy, ary tsy ho an-tsinony no naha-nahary Azy (Isaia 45:18).",
+      description3:
+        "Misy fitsipika vaovao izay efa voaporofo tamin'ny alalan'ny arkeolojia manerantany. Ny mpahay arkeolojia dia miara-milaza tsy misy fisalasalana, fa ao ambadiky ny habakabaka goavana sy ny izao tontolo izao, misy fototra iray: ny finoana Andriamanitra tokana, ILAY ANDRIAMANITRA TOKANA, izay ny anarany hatramin'izao dia noforanina, nosaronina, nafenina, ary natahotra. Io anarana io, יהוה, dia atao hoe 'Ny Tsiambaratelo Lehibe Indrindra Etỳ An-Tany'.",
+      description4:
+        "Ao amin'ny Ohabolana 30:4 dia misy fanontaniana maromaro momba ny Mpahary ny Lanitra, fa ny roa tonga lafatra indrindra dia: Iza no anarany, ary Iza no anaran'ny Zanany, raha hahay ny hilaza?",
+      description5:
+        "I Mosesy, talohan'ny fianjeran'i Egipta, dia nahafantatra fa zava-dehibe ny miantso an'Andriamanitra amin'ny anarany manokana (Eksodosy 3:13), ary io toe-javatra io mbola misy hatramin'izao. Talohan'ny fianjeran'i Babylona, ilay tanàna lehibe... יהוה בּן יהוה, tIlay Zanak'iיהוה, dia nahatakatra ny maha-zava-dehibe ny fiantsoana Azy amin'ny anarany manokana; fa tsy misy anarana hafa eo ambanin'ny lanitra omena ny olombelona, izay ahafahana voavonjy (Jaona 5:43; 1 Timoty 2:5-6; Asa 4:12).",
+      description6:
+        "Amin'ny fototry ny zavatra rehetra, tsy azo atao ny hiditra amin'ny fifandraisana amin'i יהוה raha tsy manaiky an'i יהוה בּן יהוה, Ilay Zanany Tiana (Jaona 10:9, 30; Jaona 14:6; Jaona 17:11). Noho izany, ny fahafantarana an'i יהוה dia mitovy amin'ny fahitana ny zava-misy amin'ny fahatokiana azo antoka sy ny famonjena. Ny fanambarana ny anarany sy ny anaran'ny Zanany no fanalahidy hahatakarana ny finoana ara-Baiboly.",
+    };
+
     await pool.query(
       `
-      INSERT INTO universe (descriptionUniverse1, descriptionUniverse2, descriptionUniverse3, descriptionUniverse4, videoLinkUniverse)
-      VALUES ($1, $2, $3, $4, $5)
+      INSERT INTO yahweh (title1, title2, description1, description2, description3, description4, description5, description6)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
       ON CONFLICT DO NOTHING
     `,
       [
-        seedData.universe.descriptionUniverse1,
-        seedData.universe.descriptionUniverse2,
-        seedData.universe.descriptionUniverse3,
-        seedData.universe.descriptionUniverse4,
-        seedData.universe.videoLinkUniverse,
+        yahwehData.title1,
+        yahwehData.title2,
+        yahwehData.description1,
+        yahwehData.description2,
+        yahwehData.description3,
+        yahwehData.description4,
+        yahwehData.description5,
+        yahwehData.description6,
       ]
     );
 
-    console.log("✅ Database seeded successfully!");
+    const yahwehbenData = {
+      title1: "Le Fils du Très-Haut",
+      title2: "YAHWEH BEN YAHWEH",
+      description1:
+        "יהוה no Andriamanitry ny andriamanitra. יהוה no Andriamanitry ny fanekena amin'i Israely. Izy no Andriamanitr'i Abrahama, Isaka, ary Jakoba. יהוה בן יהוה no Zanak'יהוה.",
+      description2:
+        "יהוה בן יהוה no Tompon’ny Efiombonana Any an-Danitra, Mpamorona ny Izao Tontolo Izao, ary Ilay Mpanjaka Masina sy Irery. Izy eto mba hamahatra ny voafonja sy hampitsangana mahitsy eo amin’ny kianja ny marina izay voafehy. Fa, indro! Misy lehibe noho i Solomona eto!",
+      description3:
+        "Tamin’ny 1979, יהוה בן יהוה dia tonga tany Miami ka lasa Mpitarika Ara-Panahy sy Mpanorina ny Firenen’i יהוה. Na dia nanao voady fahantrana aza Izy, tamin’ny fito taona Izy nitarika ny Firenena hanangona fanjakana sarobidy 250 tapitrisa dolara. Eo ambany fitarihany, ny Firenen’i יהוה dia nitombo hatramin’ny nahatratra mpianatra, mpanaraka, ary mpanohana mihoatra ny tanàna 1,300 any Etazonia sy firenena 16 any ivelany.",
+      description4:
+        "Ny asany dia hanangona aloha ny ondry very ao amin’ny tranon’i Israely, ary avy eo ny olona manana fitondrantena eto an-tany. יהוה בּן יהוה dia eto mba hametraka ny fandriampahalemana sy ny sitrapo tsara ho an’ny rehetra tia an’Andriamanitra. Izy eto mba hanorina ny governemanta teôkratikan’i יהוה amin’ny alalan’ny fanatanterahana ny lalàna, ny fitsipika, ny fitsarana, ary ny didin’i יהוה.",
+      description5:
+        "יהוה בּן יהוה dia manova ny fiainan’ny olona tsirairay, ary manome ny tany ireo lakile hahombiazana amin’ny fiaina: Ara-Politika Ara-Toekarena Ara-Panabeazana Ara-Piarahamonina Ary Ara-Panahy.",
+      description6:
+        "יהוה בּן יהוה mampianatra ny mpianany sy ny mpanaraka azy hanao fiantrana sy hatsaram-panahy, hiaro ny fahadiovam-pitondrantena, hanaja ny fifamatorana ara-pianakaviana sy namana, hanaraka ny fitsipika sy hankahala ny lalàn'i יהוה, hanampy ny lempona, hitari-dalana sy hanokatra ny mason'ny jamba, hanasitrana ny sofina'ny marenina, hampitsangana ny voahosotra sy voatendry, hialoka ny mpitondratena sy ny kamboty, hikarakara ny alitara ni יהוה, hanohana ny governemantan'i יהוה, hampianatra fitondrantena, hampahery ny fianarana, hankafy ny olona manam-pitondrantena, hatahotra an'i יהוה, hiangavy ny fahasoavany, hiasa ho an'ny fifaliana, ary hiomana.",
+      description7:
+        "Ny alatsinainy, 7 Mey 2007 tamin’ny 7:55 hariva, ny Mpanorina sy Mpanavotra antsika, יהוה בּן יהוה, dia nahavitra ny dia voalohany nataony teto an-tany ary niakatra hijoro eo anilan’ny Rainy, יהוה, any an-danitra.",
+      description8:
+        "Izany no anton’ny Fitiavan’ny Raiko, יהוה tamiko (יהוה בּן יהוה), satria natolotro ny Aiko mba hahazoako azy indray. Tsy misy olona maka izany Ahy, fa Izaho no manolotra azy irery. Manana fahefana hanolotra ny Ahy aho, ary manana fahefana hahazo azy indray. Io didy io no nalovako tamin’ny Raiko, יהוה (Jaona 10:17-18). Tsy misy fitiavana lehibe noho izany: ny manolotra ny ainy ho an’ny namany (Jaona 15:13). Ny asa ataoko amin’ny anaran’ny Raiko no mijoro ho vavolombelona momba Ahy (Jaona 10:25).",
+      description9:
+        "Ary nalefa tamiko ny fahefana, ny voninahitra, ary ny Fanjakan’ny Andriamanitra, mba hanompoan’ny firenena sy ny vahoaka rehetra, na inona na inona ny fiteniny: Ny fahefaniko dia fahefana mandrakizay, tsy hiova, ary ny Fanjakako dia tsy ho ringana (Daniely 7:14). Ary ny Fanjakako sy ny fahefaniko, ary ny hanjakan’ny Fanjakako eran’ny tany rehetra, dia homena ny olon’ny olo-masin’ny Avo Indrindra, izay manana Fanjakan’ny mandrakizay, ary ny fahefana rehetra dia hanompo sy hankatò Ahy (Daniely 7:27). Ho an’i יהוה בּן יהוה ny voninahitra sy ny fahefana mandrakizay. Amena (1 Petera 5:11).",
+    };
+
+    await pool.query(
+      `
+      INSERT INTO yahweh_ben (title1, title2, description1, description2, description3, description4, description5, description6, description7, description8, description9)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+      ON CONFLICT DO NOTHING
+    `,
+      [
+        yahwehbenData.title1,
+        yahwehbenData.title2,
+        yahwehbenData.description1,
+        yahwehbenData.description2,
+        yahwehbenData.description3,
+        yahwehbenData.description4,
+        yahwehbenData.description5,
+        yahwehbenData.description6,
+        yahwehbenData.description7,
+        yahwehbenData.description8,
+        yahwehbenData.description9,
+      ]
+    );
+    console.log("✅ All data seeded successfully!");
   } catch (error) {
-    console.error("❌ Seeding failed:", error);
+    console.error("❌ Error seeding data:", error);
   } finally {
-    process.exit();
+    await pool.end();
   }
-}
+};
 
-seedDatabase();
+seedData();
+
+// Seed contacts
+// const homeData = {
+//   title: "AFAKA MAMANTATRA NY ZANAKA VE IANAO?",
+// src1: "https://ms.yahwehbenyahweh.com/video/720/2025_FeastThemeVideo_New.mp4",
+//     poster1: "page-banner_.jpg",
+
+//     src2: "https://ms.yahwehbenyahweh.com/video/720/Good_News_Commercial.mp4",
+//     poster2: "Good_News_of_Yahweh.jpg",
+
+//     src3: "https://ms.yahwehbenyahweh.com/video/720/Home_Page_Promo.mp4",
+//     poster3: "Eternal_Life.jpg",
+// };
+
+//     const yahwehbenData = {
+//   title1: "Le Fils du Très-Haut",
+//   title2: "YAHWEH BEN YAHWEH",
+//   description1:
+//     "יהוה no Andriamanitry ny andriamanitra. יהוה no Andriamanitry ny fanekena amin'i Israely. Izy no Andriamanitr'i Abrahama, Isaka, ary Jakoba. יהוה בן יהוה no Zanak'יהוה.",
+//   description2:
+//     "יהוה בן יהוה no Tompon’ny Efiombonana Any an-Danitra, Mpamorona ny Izao Tontolo Izao, ary Ilay Mpanjaka Masina sy Irery. Izy eto mba hamahatra ny voafonja sy hampitsangana mahitsy eo amin’ny kianja ny marina izay voafehy. Fa, indro! Misy lehibe noho i Solomona eto!",
+//   description3:
+//     "Tamin’ny 1979, יהוה בן יהוה dia tonga tany Miami ka lasa Mpitarika Ara-Panahy sy Mpanorina ny Firenen’i יהוה. Na dia nanao voady fahantrana aza Izy, tamin’ny fito taona Izy nitarika ny Firenena hanangona fanjakana sarobidy 250 tapitrisa dolara. Eo ambany fitarihany, ny Firenen’i יהוה dia nitombo hatramin’ny nahatratra mpianatra, mpanaraka, ary mpanohana mihoatra ny tanàna 1,300 any Etazonia sy firenena 16 any ivelany.",
+//   description4:
+//     "Ny asany dia hanangona aloha ny ondry very ao amin’ny tranon’i Israely, ary avy eo ny olona manana fitondrantena eto an-tany. יהוה בּן יהוה dia eto mba hametraka ny fandriampahalemana sy ny sitrapo tsara ho an’ny rehetra tia an’Andriamanitra. Izy eto mba hanorina ny governemanta teôkratikan’i יהוה amin’ny alalan’ny fanatanterahana ny lalàna, ny fitsipika, ny fitsarana, ary ny didin’i יהוה.",
+//   description5:
+//     "יהוה בּן יהוה dia manova ny fiainan’ny olona tsirairay, ary manome ny tany ireo lakile hahombiazana amin’ny fiaina: Ara-Politika Ara-Toekarena Ara-Panabeazana Ara-Piarahamonina Ary Ara-Panahy.",
+//   description6:
+//     "יהוה בּן יהוה mampianatra ny mpianany sy ny mpanaraka azy hanao fiantrana sy hatsaram-panahy, hiaro ny fahadiovam-pitondrantena, hanaja ny fifamatorana ara-pianakaviana sy namana, hanaraka ny fitsipika sy hankahala ny lalàn'i יהוה, hanampy ny lempona, hitari-dalana sy hanokatra ny mason'ny jamba, hanasitrana ny sofina'ny marenina, hampitsangana ny voahosotra sy voatendry, hialoka ny mpitondratena sy ny kamboty, hikarakara ny alitara ni יהוה, hanohana ny governemantan'i יהוה, hampianatra fitondrantena, hampahery ny fianarana, hankafy ny olona manam-pitondrantena, hatahotra an'i יהוה, hiangavy ny fahasoavany, hiasa ho an'ny fifaliana, ary hiomana.",
+//   description7:
+//     "Ny alatsinainy, 7 Mey 2007 tamin’ny 7:55 hariva, ny Mpanorina sy Mpanavotra antsika, יהוה בּן יהוה, dia nahavitra ny dia voalohany nataony teto an-tany ary niakatra hijoro eo anilan’ny Rainy, יהוה, any an-danitra.",
+//   description8:
+//     "Izany no anton’ny Fitiavan’ny Raiko, יהוה tamiko (יהוה בּן יהוה), satria natolotro ny Aiko mba hahazoako azy indray. Tsy misy olona maka izany Ahy, fa Izaho no manolotra azy irery. Manana fahefana hanolotra ny Ahy aho, ary manana fahefana hahazo azy indray. Io didy io no nalovako tamin’ny Raiko, יהוה (Jaona 10:17-18). Tsy misy fitiavana lehibe noho izany: ny manolotra ny ainy ho an’ny namany (Jaona 15:13). Ny asa ataoko amin’ny anaran’ny Raiko no mijoro ho vavolombelona momba Ahy (Jaona 10:25).",
+//   description9:
+//     "Ary nalefa tamiko ny fahefana, ny voninahitra, ary ny Fanjakan’ny Andriamanitra, mba hanompoan’ny firenena sy ny vahoaka rehetra, na inona na inona ny fiteniny: Ny fahefaniko dia fahefana mandrakizay, tsy hiova, ary ny Fanjakako dia tsy ho ringana (Daniely 7:14). Ary ny Fanjakako sy ny fahefaniko, ary ny hanjakan’ny Fanjakako eran’ny tany rehetra, dia homena ny olon’ny olo-masin’ny Avo Indrindra, izay manana Fanjakan’ny mandrakizay, ary ny fahefana rehetra dia hanompo sy hankatò Ahy (Daniely 7:27). Ho an’i יהוה בּן יהוה ny voninahitra sy ny fahefana mandrakizay. Amena (1 Petera 5:11).",
+// };
+
+// await pool.query(
+//   `
+//   INSERT INTO followers (title1, title2, description1, description2, description3, description4, description5, description6, description7, description8, description9)
+//   VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+//   ON CONFLICT DO NOTHING
+// `,
+//   [
+//     yahwehbenData.title1,
+//     yahwehbenData.title2,
+//     yahwehbenData.description1,
+//     yahwehbenData.description2,
+//     yahwehbenData.description3,
+//     yahwehbenData.description4,
+//     yahwehbenData.description5,
+//     yahwehbenData.description6,
+//     yahwehbenData.description7,
+//     yahwehbenData.description8,
+//     yahwehbenData.description9,
+//   ]
+// );
