@@ -5,10 +5,19 @@ const path = require("path");
 exports.updateGalleryImage = async (req, res) => {
   try {
     const { id } = req.params;
+    const oldGallery = await GalleryImage.getById(id);
+
     const updatedImage = await GalleryImage.update(id, {
       path: `/uploads/${req.file.filename}`,
       alt: req.body.alt,
     });
+    // Supprime l'ancienne image si elle existe
+    if (oldGallery && oldGallery.path) {
+      const oldPath = path.join(__dirname, "..", oldGallery.path);
+      if (fs.existsSync(oldPath)) {
+        fs.unlinkSync(oldPath);
+      }
+    }
     res.json(updatedImage);
   } catch (error) {
     res.status(500).json({ message: error.message });
