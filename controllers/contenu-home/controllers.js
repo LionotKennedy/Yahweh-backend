@@ -4,7 +4,8 @@ const {
   FollowersModel, 
   HomePageModel, 
   HomePageVideoModel, 
-  YahwehModel 
+  YahwehModel,
+  YahwehbenModel
 } = require('../../models/contenu-home/models');
 
 const contactModel = new ContactModel();
@@ -13,6 +14,7 @@ const followersModel = new FollowersModel();
 const homePageModel = new HomePageModel();
 const homePageVideoModel = new HomePageVideoModel();
 const yahwehModel = new YahwehModel();
+const yahwehbenModel = new YahwehbenModel();
 
 const createController = (model) => ({
   // GET all
@@ -131,6 +133,7 @@ const followersController = createController(followersModel);
 const homePageController = createController(homePageModel);
 const homePageVideoController = createController(homePageVideoModel);
 const yahwehController = createController(yahwehModel);
+const yahwehbenController = createController(yahwehbenModel);
 
 // Special controller for home page with videos
 const homePageWithVideosController = {
@@ -187,5 +190,6 @@ module.exports = {
   homePageVideoController,
   yahwehController,
   homePageWithVideosController,
-  videosByHomePageController
+  videosByHomePageController,
+  yahwehbenController
 };

@@ -7,7 +7,9 @@ class BaseModel {
 
   async findAll() {
     try {
-      const result = await pool.query(`SELECT * FROM ${this.tableName} ORDER BY id`);
+      const result = await pool.query(
+        `SELECT * FROM ${this.tableName} ORDER BY id`
+      );
       return result.rows;
     } catch (error) {
       throw new Error(`Error fetching ${this.tableName}: ${error.message}`);
@@ -16,16 +18,24 @@ class BaseModel {
 
   async findById(id) {
     try {
-      const result = await pool.query(`SELECT * FROM ${this.tableName} WHERE id = $1`, [id]);
+      const result = await pool.query(
+        `SELECT * FROM ${this.tableName} WHERE id = $1`,
+        [id]
+      );
       return result.rows[0];
     } catch (error) {
-      throw new Error(`Error fetching ${this.tableName} by id: ${error.message}`);
+      throw new Error(
+        `Error fetching ${this.tableName} by id: ${error.message}`
+      );
     }
   }
 
   async deleteById(id) {
     try {
-      const result = await pool.query(`DELETE FROM ${this.tableName} WHERE id = $1 RETURNING *`, [id]);
+      const result = await pool.query(
+        `DELETE FROM ${this.tableName} WHERE id = $1 RETURNING *`,
+        [id]
+      );
       return result.rows[0];
     } catch (error) {
       throw new Error(`Error deleting ${this.tableName}: ${error.message}`);
@@ -35,7 +45,7 @@ class BaseModel {
 
 class ContactModel extends BaseModel {
   constructor() {
-    super('contacts');
+    super("contacts");
   }
 
   async create(data) {
@@ -70,16 +80,30 @@ class ContactModel extends BaseModel {
 
 class CulturalAttireModel extends BaseModel {
   constructor() {
-    super('cultural_attire');
+    super("cultural_attire");
   }
 
   async create(data) {
     try {
-      const { title, description1, description2, description3, description4, description5 } = data;
+      const {
+        title,
+        description1,
+        description2,
+        description3,
+        description4,
+        description5,
+      } = data;
       const result = await pool.query(
         `INSERT INTO cultural_attire (title, description1, description2, description3, description4, description5) 
          VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
-        [title, description1, description2, description3, description4, description5]
+        [
+          title,
+          description1,
+          description2,
+          description3,
+          description4,
+          description5,
+        ]
       );
       return result.rows[0];
     } catch (error) {
@@ -89,12 +113,27 @@ class CulturalAttireModel extends BaseModel {
 
   async update(id, data) {
     try {
-      const { title, description1, description2, description3, description4, description5 } = data;
+      const {
+        title,
+        description1,
+        description2,
+        description3,
+        description4,
+        description5,
+      } = data;
       const result = await pool.query(
         `UPDATE cultural_attire 
          SET title = $1, description1 = $2, description2 = $3, description3 = $4, description4 = $5, description5 = $6, updated_at = CURRENT_TIMESTAMP
          WHERE id = $7 RETURNING *`,
-        [title, description1, description2, description3, description4, description5, id]
+        [
+          title,
+          description1,
+          description2,
+          description3,
+          description4,
+          description5,
+          id,
+        ]
       );
       return result.rows[0];
     } catch (error) {
@@ -105,16 +144,30 @@ class CulturalAttireModel extends BaseModel {
 
 class FollowersModel extends BaseModel {
   constructor() {
-    super('followers');
+    super("followers");
   }
 
   async create(data) {
     try {
-      const { title, description1, description2, description3, description4, description5 } = data;
+      const {
+        title,
+        description1,
+        description2,
+        description3,
+        description4,
+        description5,
+      } = data;
       const result = await pool.query(
         `INSERT INTO followers (title, description1, description2, description3, description4, description5) 
          VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
-        [title, description1, description2, description3, description4, description5]
+        [
+          title,
+          description1,
+          description2,
+          description3,
+          description4,
+          description5,
+        ]
       );
       return result.rows[0];
     } catch (error) {
@@ -124,12 +177,27 @@ class FollowersModel extends BaseModel {
 
   async update(id, data) {
     try {
-      const { title, description1, description2, description3, description4, description5 } = data;
+      const {
+        title,
+        description1,
+        description2,
+        description3,
+        description4,
+        description5,
+      } = data;
       const result = await pool.query(
         `UPDATE followers 
          SET title = $1, description1 = $2, description2 = $3, description3 = $4, description4 = $5, description5 = $6, updated_at = CURRENT_TIMESTAMP
          WHERE id = $7 RETURNING *`,
-        [title, description1, description2, description3, description4, description5, id]
+        [
+          title,
+          description1,
+          description2,
+          description3,
+          description4,
+          description5,
+          id,
+        ]
       );
       return result.rows[0];
     } catch (error) {
@@ -140,7 +208,7 @@ class FollowersModel extends BaseModel {
 
 class HomePageModel extends BaseModel {
   constructor() {
-    super('home_page');
+    super("home_page");
   }
 
   async create(data) {
@@ -174,17 +242,23 @@ class HomePageModel extends BaseModel {
 
   async findWithVideos(id) {
     try {
-      const homePageResult = await pool.query(`SELECT * FROM home_page WHERE id = $1`, [id]);
+      const homePageResult = await pool.query(
+        `SELECT * FROM home_page WHERE id = $1`,
+        [id]
+      );
       if (homePageResult.rows.length === 0) {
         return null;
       }
-      
+
       const homePage = homePageResult.rows[0];
-      const videosResult = await pool.query(`SELECT * FROM home_page_videos WHERE home_page_id = $1`, [id]);
-      
+      const videosResult = await pool.query(
+        `SELECT * FROM home_page_videos WHERE home_page_id = $1`,
+        [id]
+      );
+
       return {
         ...homePage,
-        videos: videosResult.rows
+        videos: videosResult.rows,
       };
     } catch (error) {
       throw new Error(`Error fetching home page with videos: ${error.message}`);
@@ -194,7 +268,7 @@ class HomePageModel extends BaseModel {
 
 class HomePageVideoModel extends BaseModel {
   constructor() {
-    super('home_page_videos');
+    super("home_page_videos");
   }
 
   async create(data) {
@@ -228,26 +302,49 @@ class HomePageVideoModel extends BaseModel {
 
   async findByHomePageId(homePageId) {
     try {
-      const result = await pool.query(`SELECT * FROM home_page_videos WHERE home_page_id = $1`, [homePageId]);
+      const result = await pool.query(
+        `SELECT * FROM home_page_videos WHERE home_page_id = $1`,
+        [homePageId]
+      );
       return result.rows;
     } catch (error) {
-      throw new Error(`Error fetching videos by home page id: ${error.message}`);
+      throw new Error(
+        `Error fetching videos by home page id: ${error.message}`
+      );
     }
   }
 }
 
 class YahwehModel extends BaseModel {
   constructor() {
-    super('yahweh');
+    super("yahweh");
   }
 
   async create(data) {
     try {
-      const { title1, title2, description1, description2, description3, description4, description5, description6 } = data;
+      const {
+        title1,
+        title2,
+        description1,
+        description2,
+        description3,
+        description4,
+        description5,
+        description6,
+      } = data;
       const result = await pool.query(
         `INSERT INTO yahweh (title1, title2, description1, description2, description3, description4, description5, description6) 
          VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
-        [title1, title2, description1, description2, description3, description4, description5, description6]
+        [
+          title1,
+          title2,
+          description1,
+          description2,
+          description3,
+          description4,
+          description5,
+          description6,
+        ]
       );
       return result.rows[0];
     } catch (error) {
@@ -257,16 +354,120 @@ class YahwehModel extends BaseModel {
 
   async update(id, data) {
     try {
-      const { title1, title2, description1, description2, description3, description4, description5, description6 } = data;
+      const {
+        title1,
+        title2,
+        description1,
+        description2,
+        description3,
+        description4,
+        description5,
+        description6,
+      } = data;
       const result = await pool.query(
         `UPDATE yahweh 
          SET title1 = $1, title2 = $2, description1 = $3, description2 = $4, description3 = $5, description4 = $6, description5 = $7, description6 = $8, updated_at = CURRENT_TIMESTAMP
          WHERE id = $9 RETURNING *`,
-        [title1, title2, description1, description2, description3, description4, description5, description6, id]
+        [
+          title1,
+          title2,
+          description1,
+          description2,
+          description3,
+          description4,
+          description5,
+          description6,
+          id,
+        ]
       );
       return result.rows[0];
     } catch (error) {
       throw new Error(`Error updating yahweh: ${error.message}`);
+    }
+  }
+}
+
+class YahwehbenModel extends BaseModel {
+  constructor() {
+    super("yahweh_ben");
+  }
+
+  async create(data) {
+    try {
+      const {
+        title1,
+        title2,
+        description1,
+        description2,
+        description3,
+        description4,
+        description5,
+        description6,
+        description7,
+        description8,
+        description9,
+      } = data;
+      const result = await pool.query(
+        `INSERT INTO yahweh_ben (title1, title2, description1, description2, description3, description4, description5, description6, description7, description8, description9) 
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *`,
+        [
+          title1,
+          title2,
+          description1,
+          description2,
+          description3,
+          description4,
+          description5,
+          description6,
+          description7,
+          description8,
+          description9,
+        ]
+      );
+      return result.rows[0];
+    } catch (error) {
+      throw new Error(`Error creating yahweh ben: ${error.message}`);
+    }
+  }
+
+  async update(id, data) {
+    try {
+      const {
+        title1,
+        title2,
+        description1,
+        description2,
+        description3,
+        description4,
+        description5,
+        description6,
+        description7,
+        description8,
+        description9,
+      } = data;
+      const result = await pool.query(
+        `UPDATE yahweh_ben 
+         SET title1 = $1, title2 = $2, description1 = $3, description2 = $4, description3 = $5, description4 = $6, description5 = $7, description6 = $8,
+         description7 = $9, description8 = $10, description9 = $11, updated_at = CURRENT_TIMESTAMP
+         WHERE id = $9 RETURNING *`,
+        [
+          title1,
+          title2,
+          description1,
+          description2,
+          description3,
+          description4,
+          description5,
+          description6,
+          description7,
+          description8,
+          description9,
+          id,
+        ]
+      );
+      return result.rows[0];
+    } catch (error) {
+      throw new Error(`Error updating yahweh ben: ${error.message}`);
     }
   }
 }
@@ -277,5 +478,6 @@ module.exports = {
   FollowersModel,
   HomePageModel,
   HomePageVideoModel,
-  YahwehModel
+  YahwehModel,
+  YahwehbenModel,
 };
