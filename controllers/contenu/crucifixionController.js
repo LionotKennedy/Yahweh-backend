@@ -1,5 +1,5 @@
 const Crucifixion = require('../../models/contenu/Crucifixion');
-// const { crucifixionSchema } = require('../../validation/schemas');
+const { crucifixionSchema } = require('../../validation/schemas');
 
 class CrucifixionController {
   static async getAllCrucifixion(req, res) {
@@ -66,7 +66,7 @@ class CrucifixionController {
       });
     }
   }
-
+  
   static async updateCrucifixion(req, res) {
     try {
       const { id } = req.params;
@@ -77,6 +77,13 @@ class CrucifixionController {
       //     message: error.details[0].message
       //   });
       // }
+      // Vérifiez que req.body existe et a des données
+    if (!req.body || Object.keys(req.body).length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Request body is empty or missing"
+      });
+    }
 
       const crucifixion = await Crucifixion.update(id, req.body);
       if (!crucifixion) {

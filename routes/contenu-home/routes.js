@@ -10,6 +10,7 @@ const {
   homePageWithVideosController,
   videosByHomePageController,
   yahwehbenController,
+  homeController
 } = require("../../controllers/contenu-home/controllers");
 
 // Health check route
@@ -41,6 +42,13 @@ router.get("/followers/:id", followersController.getById);
 router.post("/followers", followersController.create);
 router.put("/followers/:id", followersController.update);
 router.delete("/followers/:id", followersController.delete);
+
+// Home Page routes
+router.get("/home", homeController.getAll);
+router.get("/home/:id", homeController.getById);
+router.post("/home", homeController.create);
+router.put("/home/:id", homeController.update);
+router.delete("/home/:id", homeController.delete);
 
 // Home Page routes
 router.get("/home-page", homePageController.getAll);

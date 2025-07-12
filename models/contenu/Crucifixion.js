@@ -102,7 +102,6 @@ class Crucifixion {
           descriptionCrucifixion9,
           descriptionCrucifixion10,
           descriptionCrucifixion11,
-          ,
           id,
         ]
       );

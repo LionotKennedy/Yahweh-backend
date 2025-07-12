@@ -17,4 +17,4 @@ router.put('/:id', BalanceController.updateBalance);
 // DELETE /api/v1/balance/:id - Delete balance record
 router.delete('/:id', BalanceController.deleteBalance);
 
-module.exports = router;
+module.exports = router; 

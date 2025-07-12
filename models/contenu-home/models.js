@@ -50,7 +50,13 @@ class ContactModel extends BaseModel {
 
   async create(data) {
     try {
-      const { title, description1, description2, phone, email } = data;
+      const {
+        title,
+        description1,
+        description2,
+        phone,
+        email
+      } = data;
       const result = await pool.query(
         `INSERT INTO contacts (title, description1, description2, phone, email) 
          VALUES ($1, $2, $3, $4, $5) RETURNING *`,
@@ -64,7 +70,13 @@ class ContactModel extends BaseModel {
 
   async update(id, data) {
     try {
-      const { title, description1, description2, phone, email } = data;
+      const {
+        title,
+        description1,
+        description2,
+        phone,
+        email
+      } = data;
       const result = await pool.query(
         `UPDATE contacts 
          SET title = $1, description1 = $2, description2 = $3, phone = $4, email = $5, updated_at = CURRENT_TIMESTAMP
@@ -206,6 +218,67 @@ class FollowersModel extends BaseModel {
   }
 }
 
+class HomeModel extends BaseModel {
+  
+  constructor() {
+    super("homes");
+  }
+  async create(data) {
+    try {
+      const {
+        title,
+        description1,
+        src1,
+        src2,
+        src3,
+
+      } = data;
+      const result = await pool.query(
+        `INSERT INTO homes (title, title2, description1, src1, src2, src3) 
+         VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+        [
+          title,
+          description1,
+          src1,
+          src2,
+          src3,
+        ]
+      );
+      return result.rows[0];
+    } catch (error) {
+      throw new Error(`Error creating home: ${error.message}`);
+    }
+  }
+
+  async update(id, data) {
+    try {
+      const {
+        title,
+        description1,
+        src1,
+        src2,
+        src3,
+      } = data;
+      const result = await pool.query(
+        `UPDATE homes 
+         SET title = $1, description1 = $2, src1 = $3, src2 = $4, src3 = $5, updated_at = CURRENT_TIMESTAMP
+         WHERE id = $6 RETURNING *`,
+        [
+          title,
+          description1,
+          src1,
+          src2,
+          src3,
+          id,
+        ]
+      );
+      return result.rows[0];
+    } catch (error) {
+      throw new Error(`Error updating home: ${error.message}`);
+    }
+  }
+}
+
 class HomePageModel extends BaseModel {
   constructor() {
     super("home_page");
@@ -213,7 +286,10 @@ class HomePageModel extends BaseModel {
 
   async create(data) {
     try {
-      const { video_section_title, video_section_content } = data;
+      const {
+        video_section_title,
+        video_section_content
+      } = data;
       const result = await pool.query(
         `INSERT INTO home_page (video_section_title, video_section_content) 
          VALUES ($1, $2) RETURNING *`,
@@ -227,7 +303,10 @@ class HomePageModel extends BaseModel {
 
   async update(id, data) {
     try {
-      const { video_section_title, video_section_content } = data;
+      const {
+        video_section_title,
+        video_section_content
+      } = data;
       const result = await pool.query(
         `UPDATE home_page 
          SET video_section_title = $1, video_section_content = $2, updated_at = CURRENT_TIMESTAMP
@@ -273,7 +352,11 @@ class HomePageVideoModel extends BaseModel {
 
   async create(data) {
     try {
-      const { home_page_id, src, poster } = data;
+      const {
+        home_page_id,
+        src,
+        poster
+      } = data;
       const result = await pool.query(
         `INSERT INTO home_page_videos (home_page_id, src, poster) 
          VALUES ($1, $2, $3) RETURNING *`,
@@ -287,7 +370,11 @@ class HomePageVideoModel extends BaseModel {
 
   async update(id, data) {
     try {
-      const { home_page_id, src, poster } = data;
+      const {
+        home_page_id,
+        src,
+        poster
+      } = data;
       const result = await pool.query(
         `UPDATE home_page_videos 
          SET home_page_id = $1, src = $2, poster = $3, updated_at = CURRENT_TIMESTAMP
@@ -449,7 +536,7 @@ class YahwehbenModel extends BaseModel {
         `UPDATE yahweh_ben 
          SET title1 = $1, title2 = $2, description1 = $3, description2 = $4, description3 = $5, description4 = $6, description5 = $7, description6 = $8,
          description7 = $9, description8 = $10, description9 = $11, updated_at = CURRENT_TIMESTAMP
-         WHERE id = $9 RETURNING *`,
+         WHERE id = $12 RETURNING *`,
         [
           title1,
           title2,
@@ -480,4 +567,5 @@ module.exports = {
   HomePageVideoModel,
   YahwehModel,
   YahwehbenModel,
+  HomeModel
 };

@@ -1,11 +1,12 @@
-const { 
-  ContactModel, 
-  CulturalAttireModel, 
-  FollowersModel, 
-  HomePageModel, 
-  HomePageVideoModel, 
+const {
+  ContactModel,
+  CulturalAttireModel,
+  FollowersModel,
+  HomePageModel,
+  HomePageVideoModel,
   YahwehModel,
-  YahwehbenModel
+  YahwehbenModel,
+  HomeModel
 } = require('../../models/contenu-home/models');
 
 const contactModel = new ContactModel();
@@ -15,6 +16,7 @@ const homePageModel = new HomePageModel();
 const homePageVideoModel = new HomePageVideoModel();
 const yahwehModel = new YahwehModel();
 const yahwehbenModel = new YahwehbenModel();
+const homeModel = new HomeModel();
 
 const createController = (model) => ({
   // GET all
@@ -36,9 +38,11 @@ const createController = (model) => ({
   // GET by id
   getById: async (req, res) => {
     try {
-      const { id } = req.params;
+      const {
+        id
+      } = req.params;
       const data = await model.findById(id);
-      
+
       if (!data) {
         return res.status(404).json({
           success: false,
@@ -61,6 +65,7 @@ const createController = (model) => ({
   // POST create
   create: async (req, res) => {
     try {
+
       const data = await model.create(req.body);
       res.status(201).json({
         success: true,
@@ -77,9 +82,11 @@ const createController = (model) => ({
   // PUT update
   update: async (req, res) => {
     try {
-      const { id } = req.params;
+      const {
+        id
+      } = req.params;
       const data = await model.update(id, req.body);
-      
+
       if (!data) {
         return res.status(404).json({
           success: false,
@@ -102,9 +109,11 @@ const createController = (model) => ({
   // DELETE
   delete: async (req, res) => {
     try {
-      const { id } = req.params;
+      const {
+        id
+      } = req.params;
       const data = await model.deleteById(id);
-      
+
       if (!data) {
         return res.status(404).json({
           success: false,
@@ -134,14 +143,17 @@ const homePageController = createController(homePageModel);
 const homePageVideoController = createController(homePageVideoModel);
 const yahwehController = createController(yahwehModel);
 const yahwehbenController = createController(yahwehbenModel);
+const homeController = createController(homeModel);
 
 // Special controller for home page with videos
 const homePageWithVideosController = {
   getWithVideos: async (req, res) => {
     try {
-      const { id } = req.params;
+      const {
+        id
+      } = req.params;
       const data = await homePageModel.findWithVideos(id);
-      
+
       if (!data) {
         return res.status(404).json({
           success: false,
@@ -166,9 +178,11 @@ const homePageWithVideosController = {
 const videosByHomePageController = {
   getByHomePageId: async (req, res) => {
     try {
-      const { homePageId } = req.params;
+      const {
+        homePageId
+      } = req.params;
       const data = await homePageVideoModel.findByHomePageId(homePageId);
-      
+
       res.json({
         success: true,
         data: data
@@ -191,5 +205,6 @@ module.exports = {
   yahwehController,
   homePageWithVideosController,
   videosByHomePageController,
-  yahwehbenController
+  yahwehbenController,
+  homeController,
 };
