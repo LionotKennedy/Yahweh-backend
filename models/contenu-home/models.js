@@ -219,7 +219,7 @@ class FollowersModel extends BaseModel {
 }
 
 class HomeModel extends BaseModel {
-  
+
   constructor() {
     super("homes");
   }

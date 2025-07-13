@@ -1,0 +1,78 @@
+
+//   static async update(id, data) {
+//   // Validation des données requises
+//   const requiredFields = [
+//     'titlebalance',
+//     'descriptionbalance1',
+//     'descriptionbalance2',
+//     'descriptionbalance3',
+//     'descriptionbalance4'
+//   ];
+
+//   // Vérification que toutes les propriétés sont présentes
+//   const missingFields = requiredFields.filter(field => !data[field]);
+  
+//   if (missingFields.length > 0) {
+//     throw new Error(`Les champs suivants sont requis : ${missingFields.join(', ')}`);
+//   }
+
+//   try {
+//     const result = await pool.query(
+//       `UPDATE balance SET 
+//          titlebalance = $1,
+//          descriptionbalance1 = $2,
+//          descriptionbalance2 = $3,
+//          descriptionbalance3 = $4,
+//          descriptionbalance4 = $5,
+//          updated_at = CURRENT_TIMESTAMP 
+//        WHERE id = $6 RETURNING *`,
+//       [
+//         data.titlebalance,
+//         data.descriptionbalance1,
+//         data.descriptionbalance2,
+//         data.descriptionbalance3,
+//         data.descriptionbalance4,
+//         id
+//       ]
+//     );
+
+//     return result.rows[0];
+//   } catch (error) {
+//     throw new Error(`Erreur lors de la mise à jour du record : ${error.message}`);
+//   }
+// }
+
+// static async update(id, data) {
+//   // Vérifier si data existe
+//   if (!data) {
+//     throw new Error('No data provided for update');
+//   }
+
+//   const {
+//     titlebalance,
+//     descriptionbalance1,
+//     descriptionbalance2,
+//     descriptionbalance3,
+//     descriptionbalance4,
+//   } = data;
+
+//   try {
+//     const result = await pool.query(
+//       `UPDATE balance SET titlebalance = $1, descriptionbalance1 = $2, descriptionbalance2 = $3, 
+//        descriptionbalance3 = $4, descriptionbalance4 = $5, updated_at = CURRENT_TIMESTAMP 
+//        WHERE id = $6 RETURNING *`,
+//       [
+//         titlebalance,
+//         descriptionbalance1,
+//         descriptionbalance2,
+//         descriptionbalance3,
+//         descriptionbalance4,
+//         id,
+//       ]
+//     );
+//     return result.rows[0];
+//   } catch (error) {
+//     throw new Error(`Error updating balance record: ${error.message}`);
+//   }
+// }
+

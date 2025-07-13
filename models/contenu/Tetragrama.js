@@ -25,7 +25,11 @@ class Tetragrama {
   }
 
   static async create(data) {
-    const { title, description, description2 } = data;
+    const {
+      title,
+      description,
+      description2
+    } = data;
     try {
       const result = await pool.query(
         `INSERT INTO tetragrama (title, description, description2) 
@@ -39,7 +43,11 @@ class Tetragrama {
   }
 
   static async update(id, data) {
-    const { title, description, description2 } = data;
+    const {
+      title,
+      description,
+      description2
+    } = data;
     try {
       const result = await pool.query(
         `UPDATE tetragrama SET title = $1, description = $2, description2 = $3, 

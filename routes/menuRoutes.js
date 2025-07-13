@@ -8,8 +8,6 @@ router.post('/:section', upload.single('image'), sectionMenuController.createSec
 router.get('/', sectionMenuController.getSectionMenuBackgrounds);
 router.get('/:section', sectionMenuController.getSectionMenuBackground);
 
-// Nouvelle route pour récupérer par ID
-// router.get('/id/:id', sectionMenuController.getBackgroundMenuById);
 router.get('/id/:id', sectionMenuController.getBackgroundMenuById);
 
 router.put('/id/:id', upload.single('image'), sectionMenuController.updateBackgroundMenuById);

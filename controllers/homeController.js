@@ -1,20 +1,6 @@
-// const BookOfMonth = require("../models/BookOfMonth");
 const HomeBanner = require("../models/HomeBanner");
 const fs = require("fs");
 const path = require("path");
-
-// exports.updateBanner = async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const updatedBanner = await HomeBanner.update(id, {
-//       path: `/uploads/${req.file.filename}`,
-//       alt: req.body.alt,
-//     });
-//     res.json(updatedBanner);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
 
 exports.updateBanner = async (req, res) => {
   try {
@@ -74,24 +60,3 @@ exports.getBanner = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-// exports.getBookOfMonth = async (req, res) => {
-//     try {
-//         const book = await BookOfMonth.get();
-//         res.json(book);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
-// exports.updateBookOfMonth = async (req, res) => {
-//   try {
-//     const updatedBook = await BookOfMonth.update(1, {
-//       // ID fixe car une seule image
-//       path: `/uploads/${req.file.filename}`,
-//       alt: req.body.alt,
-//     });
-//     res.json(updatedBook);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };

@@ -1,5 +1,5 @@
 const Crucifixion = require('../../models/contenu/Crucifixion');
-const { crucifixionSchema } = require('../../validation/schemas');
+// const { crucifixionSchema } = require('../../validation/schemas');
 
 class CrucifixionController {
   static async getAllCrucifixion(req, res) {

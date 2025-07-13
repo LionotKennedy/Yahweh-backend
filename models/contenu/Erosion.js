@@ -20,7 +20,9 @@ class Erosion {
   }
 
   static async create(data) {
-    const { descriptionErosion } = data;
+    const {
+      descriptionErosion
+    } = data;
     try {
       const result = await pool.query(
         `INSERT INTO erosion (descriptionErosion) VALUES ($1) RETURNING *`,
@@ -33,7 +35,9 @@ class Erosion {
   }
 
   static async update(id, data) {
-    const { descriptionErosion } = data;
+    const {
+      descriptionErosion
+    } = data;
     try {
       const result = await pool.query(
         `UPDATE erosion SET descriptionErosion = $1, updated_at = CURRENT_TIMESTAMP 

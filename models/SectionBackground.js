@@ -2,7 +2,9 @@ const pool = require("../config/db");
 
 class SectionBackground {
   static async getBySection(sectionName) {
-    const { rows } = await pool.query(
+    const {
+      rows
+    } = await pool.query(
       "SELECT * FROM section_backgrounds WHERE section_name = $1",
       [sectionName]
     );
@@ -10,7 +12,9 @@ class SectionBackground {
   }
 
   static async update(sectionName, path) {
-    const { rows } = await pool.query(
+    const {
+      rows
+    } = await pool.query(
       `INSERT INTO section_backgrounds (section_name, path)
        VALUES ($1, $2)
        ON CONFLICT (section_name) 
@@ -21,26 +25,40 @@ class SectionBackground {
     return rows[0];
   }
 
-  static async create({ section_name, path }) {
-    const { rows } = await pool.query(
+  static async create({
+    section_name,
+    path
+  }) {
+    const {
+      rows
+    } = await pool.query(
       "INSERT INTO section_backgrounds (section_name, path) VALUES ($1, $2) RETURNING *",
       [section_name, path]
     );
     return rows[0];
   }
   static async getAll() {
-    const { rows } = await pool.query("SELECT * FROM section_backgrounds");
+    const {
+      rows
+    } = await pool.query("SELECT * FROM section_backgrounds");
     return rows;
   }
   static async getById(id) {
-    const { rows } = await pool.query(
+    const {
+      rows
+    } = await pool.query(
       "SELECT * FROM section_backgrounds WHERE id = $1",
       [id]
     );
     return rows[0];
   }
-  static async updateById(id, { path, section_name }) {
-    const { rows } = await pool.query(
+  static async updateById(id, {
+    path,
+    section_name
+  }) {
+    const {
+      rows
+    } = await pool.query(
       `UPDATE section_backgrounds 
      SET path = $1, section_name = COALESCE($2, section_name) 
      WHERE id = $3 RETURNING *`,
