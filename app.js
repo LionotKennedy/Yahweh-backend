@@ -10,12 +10,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-app.use(bodyParser.json()); // Pour parser les requêtes JSON
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
-})); // Pour parser les données URL encodées
+}));
 
-// Routes
+/****************************
+ * Routes existantes
+ ****************************/
 app.use('/api/home', require('./routes/homeRoutes'));
 app.use('/api/gallery', require('./routes/galleryRoutes'));
 app.use('/api/sections', require('./routes/sectionRoutes'));
@@ -33,6 +35,38 @@ app.use('/api/sabbath', require('./routes/contenu/sabbathRoutes'));
 app.use('/api/tetragrama', require('./routes/contenu/tetragramaRoutes'));
 app.use('/api/universe', require('./routes/contenu/universeRoutes'));
 app.use('/api/home-contenu', require('./routes/contenu-home/routes'));
+
+/****************************
+ * Nouvelle gestion des utilisateurs
+ ****************************/
+app.use('/api/auth', require('./routes/authRoutes')); // Routes d'authentification
+app.use('/api/users', require('./routes/userRoutes')); // Routes de gestion des utilisateurs
+
+
+// Remplacez TOUTE la partie gestion des erreurs et 404 par ceci :
+
+/****************************
+ * Gestion des erreurs modernisée
+ ****************************/
+// Middleware pour routes non trouvées
+app.use((req, res, next) => {
+  res.status(404).json({
+    success: false,
+    message: `Endpoint ${req.method} ${req.originalUrl} non trouvé`
+  });
+});
+
+// Gestionnaire d'erreurs global
+app.use((err, req, res, next) => {
+  console.error('Erreur:', err.message);
+  res.status(err.status || 500).json({
+    success: false,
+    message: err.message || 'Erreur interne du serveur',
+    ...(process.env.NODE_ENV === 'development' && {
+      stack: err.stack
+    })
+  });
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

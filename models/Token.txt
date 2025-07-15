@@ -1,0 +1,46 @@
+// const db = require('../config/db');
+
+// class Token {
+//   static async createResetToken(userId, token) {
+//     const expiresAt = new Date(Date.now() + 3600000); // 1 heure d'expiration
+//     await db.query(
+//       'INSERT INTO reset_tokens (user_id, token, expires_at) VALUES ($1, $2, $3)',
+//       [userId, token, expiresAt]
+//     );
+//   }
+
+//   static async findResetToken(token) {
+//     const { rows } = await db.query(
+//       'SELECT * FROM reset_tokens WHERE token = $1 AND expires_at > NOW()',
+//       [token]
+//     );
+//     return rows[0];
+//   }
+
+//   static async deleteResetToken(token) {
+//     await db.query('DELETE FROM reset_tokens WHERE token = $1', [token]);
+//   }
+// }
+
+// module.exports = Token;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//   static async blacklistToken(token) {
+//     const expiresAt = new Date(); // Expire immédiatement
+//     await db.query(
+//         'INSERT INTO blacklisted_tokens (token, expires_at) VALUES ($1, $2)',
+//         [token, expiresAt]
+//     );
+// }
