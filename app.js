@@ -45,6 +45,52 @@ app.use('/api/users', require('./routes/userRoutes')); // Routes de gestion des 
 
 // Remplacez TOUTE la partie gestion des erreurs et 404 par ceci :
 
+
+
+/****************************
+ * Webhook GitHub pour déploiement automatique
+ ****************************/
+const { exec } = require('child_process');
+const crypto = require('crypto');
+
+// Middleware pour vérifier le secret GitHub (optionnel mais recommandé)
+const verifyWebhookSecret = (req, res, next) => {
+  const githubSecret = process.env.GITHUB_WEBHOOK_SECRET; // À définir dans .env
+  const signature = req.headers['x-hub-signature-256'];
+  
+  if (!githubSecret || !signature) {
+    return res.status(403).json({ error: "Accès refusé" });
+  }
+
+  const hmac = crypto.createHmac('sha256', githubSecret);
+  const digest = 'sha256=' + hmac.update(JSON.stringify(req.body)).digest('hex');
+  
+  if (signature !== digest) {
+    return res.status(403).json({ error: "Signature invalide" });
+  }
+  
+  next();
+};
+
+// Route du webhook
+app.post('/webhook', verifyWebhookSecret, (req, res) => {
+  if (req.headers['x-github-event'] === 'push') {
+    exec('cd ~/apps_backend/Yahweh-backend && git pull && npm install && pm2 restart Yahweh-backend', 
+      (err, stdout, stderr) => {
+        if (err) {
+          console.error('Erreur de déploiement:', err);
+          return res.status(500).send('Échec du déploiement');
+        }
+        console.log('Déploiement réussi:', stdout);
+        res.status(200).send('Mise à jour effectuée');
+      }
+    );
+  } else {
+    res.status(200).send('Événement GitHub ignoré (non push)');
+  }
+});
+
+
 /****************************
  * Gestion des erreurs modernisée
  ****************************/
