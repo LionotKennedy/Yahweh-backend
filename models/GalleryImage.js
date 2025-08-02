@@ -11,26 +11,32 @@ class GalleryImage {
   }
 
   static async update(id, {
-    path,
+    src,
+    // path,
     alt
   }) {
     const {
       rows
     } = await pool.query(
-      "UPDATE gallery_images SET path = $1, alt = $2 WHERE id = $3 RETURNING *",
-      [path, alt, id]
+      // "UPDATE gallery_images SET path = $1, alt = $2 WHERE id = $3 RETURNING *",
+      // [path, alt, id]
+      "UPDATE gallery_images SET src = $1, alt = $2 WHERE id = $3 RETURNING *",
+      [src, alt, id]
     );
     return rows[0];
   }
   static async create({
-    path,
+    // path,
+    src,
     alt
   }) {
     const {
       rows
     } = await pool.query(
-      "INSERT INTO gallery_images (path, alt) VALUES ($1, $2) RETURNING *",
-      [path, alt]
+      "INSERT INTO gallery_images (src, alt) VALUES ($1, $2) RETURNING *",
+      [src, alt]
+      // "INSERT INTO gallery_images (path, alt) VALUES ($1, $2) RETURNING *",
+      // [path, alt]
     );
     return rows[0];
   }
