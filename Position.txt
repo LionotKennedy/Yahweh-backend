@@ -1,8 +1,0 @@
-home_banners -> position -> sort +
-contact_images -> path -> src +
-gallery_images -> path -> src +
-home_banners -> path -> src +
-section_backgrounds -> path -> src +
-section_backgrounds -> section_name -> section +
-section_menus -> section_name -> section
-section_menus -> path -> src
